@@ -6,7 +6,7 @@ const defaultOption = {
 };
 
 const request = require("request-promise").defaults(defaultOption);
-const credentials = (require = require("./credentials"));
+const credentials = require("./credentials");
 const fs = require("fs");
 
 async function main() {
