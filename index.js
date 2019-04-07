@@ -7,6 +7,7 @@ const defaultOption = {
 
 const request = require("request-promise").defaults(defaultOption);
 const credentials = (require = require("./credentials"));
+const fs = require("fs");
 
 async function main() {
   const options = {
@@ -24,10 +25,21 @@ async function main() {
   try {
     const result = await request(options);
     console.log(result.headers.location);
+    const homepage = await request.get(result.headers.location);
+    writeFile(homepage);
   } catch (error) {
     console.log(error);
     console.log("ERROR");
   }
+}
+
+function writeFile(body) {
+  fs.writeFile("./test.html", body, function(err) {
+    if (err) {
+      console.log(err);
+    }
+    console.log("Html was saved");
+  });
 }
 
 main();
